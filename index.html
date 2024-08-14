@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/lenis@1.1.9/dist/lenis.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="w-full bg-zinc-900">
+      <div class="parent w-full h-[700vh] relative top-0 left-0">
+        <div class="sticky w-full h-screen top-0 left-0 overflow-x-hidden">
+          <canvas class="w-full h-screen" id="frame"></canvas>
+          <div
+            class="animate1 absolute z-[2] left-10 bottom-10 w-1/2 text-white"
+          >
+            <h1 class="text-3xl font-[100] leading-20 uppercase">
+              &copy;2024 DOZE STD
+            </h1>
+            <h1 class="text-3xl uppercase">
+              shaping brands &rarr; crafting motion
+            </h1>
+          </div>
+          <div
+            class="animate2 absolute z-[2] right-10 bottom-10 text-white text-right opacity-0 flex w-1/3"
+          >
+            <h1 class="text-6xl width-fit leading-20 font-[100]">
+              TRANSFORMING VISIONS
+            </h1>
+            <h1 class="text-xl w-1/2">
+              Building identity and inspiring action. Sculpting digital
+              experience resonate
+            </h1>
+          </div>
+          <div
+            class="animate3 absolute z-[2] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center opacity-0"
+          >
+            <h1 class="text-6xl leading-20 font-[100]">Elevating Aesthetics</h1>
+            <h1 class="text-xl">
+              Crafting solutions and exploring new horizon. Evolving narratives
+              and elevating aesthetics in every project. experience resonate
+            </h1>
+          </div>
+          <div
+            class="absolute animate4 z-[2] top-0 right-0 translate-x-full h-screen w-1/3 bg-white text-black p-12"
+          >
+            <h2 class="text-3xl font-[400] text-slate-500">
+              &copy;2024 Doze.std
+            </h2>
+            <p class="font-semibold text-2xl mt-12">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+              distinctio, suscipit iste, magnam ducimus nihil exercitationem,
+              tempora dignissimos tenetur ut assumenda. Ut sint quos ab
+              exercitationem sit ullam laboriosam maxime illo eos.
+            </p>
+            <button class="border-2 border-black px-4 py-2 mt-4">
+              Get Reviews &rarr;
+            </button>
+            <div class="mt-20">
+              <h2 class="font-semibold text-2xl">Innovating Design</h2>
+              <p class="font-semibold text-xl mt-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+                distinctio, suscipit iste, magnam ducimus nihil exercitationem.
+              </p>
+              <button class="bg-black text-white px-8 py-4 mt-4">
+                Experience
+              </button>
+            </div>
+          </div>
+          <div
+            class="absolute panelism z-[2] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white text-6xl tracking-tighter opacity-0"
+          >
+            &copy;Panelism
+            <span class="line w-10 h-1 bg-white inline-block"></span> 2048
+          </div>
+        </div>
+      </div>
+      <div class="w-full bg-white text-black px-10 py-32">
+        <h1 class="text-6xl tracking-tighter">&reg;Our Recent Works.</h1>
+        <div
+          class="text-5xl recent-works font-semibold flex flex-col gap-5 mt-16 p-3 w-1/2"
+        >
+          <h2>Zonk Blerk</h2>
+          <h2>Flibbler Sploke</h2>
+          <h2>Wibble Zurf</h2>
+          <h2>Snarp Woogle</h2>
+          <h2>Zonk Blerk</h2>
+          <h2>Flibbler Sploke</h2>
+          <h2>Wibble Zurf</h2>
+          <h2>Snarp Woogle</h2>
+          <h2>Zonk Blerk</h2>
+          <h2>Flibbler Sploke</h2>
+          <h2>Wibble Zurf</h2>
+          <h2>Snarp Woogle</h2>
+          <h2>Zonk Blerk</h2>
+          <h2>Flibbler Sploke</h2>
+          <h2>Wibble Zurf</h2>
+          <h2>Snarp Woogle</h2>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      const canvas = document.querySelector("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const frames = {
+        currentIndex: 0,
+        maxFrames: 382,
+      };
+      let imageLoaded = 0;
+      const images = [];
+      const preloadImages = () => {
+        for (let i = 1; i <= frames.maxFrames; i++) {
+          const img = new Image();
+          img.src = `./Frames/frame_${i.toString().padStart(4, "0")}.jpeg`;
+          img.onload = () => {
+            imageLoaded++;
+            if (imageLoaded === frames.maxFrames) {
+              loadImage(frames.currentIndex);
+              startAnimation();
+            }
+          };
+          images.push(img);
+        }
+      };
+      const loadImage = (index) => {
+        if (index >= 0 && index <= frames.maxFrames) {
+          const img = images[index];
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+
+          const scaleX = canvas.width / img.width;
+          const scaleY = canvas.height / img.height;
+          const scale = Math.max(scaleX, scaleY);
+
+          const newWidth = img.width * scale;
+          const newHeight = img.height * scale;
+
+          const offsetX = (canvas.width - newWidth) / 2;
+          const offsetY = (canvas.height - newHeight) / 2;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          ctx.drawImage(img, offsetX, offsetY, newWidth, newHeight);
+        }
+      };
+
+      const startAnimation = () => {
+        var tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".parent",
+            start: "top top",
+            scrub: 1,
+          },
+        });
+        const updateFrame = (index) => {
+          return {
+            currentIndex: index,
+            ease: "linear",
+            onUpdate: function () {
+              loadImage(Math.floor(frames.currentIndex));
+            },
+          };
+        };
+
+        tl.to(frames, updateFrame(50), "first")
+          .to(".animate1", { opacity: 0, ease: "linear" }, "first")
+
+          .to(frames, updateFrame(80), "second")
+          .to(".animate2", { opacity: 1, ease: "linear" }, "second")
+
+          .to(frames, updateFrame(110), "third")
+          .to(".animate2", { opacity: 0, ease: "linear" }, "third")
+
+          .to(frames, updateFrame(140), "fourth")
+          .to(".animate3", { opacity: 1, ease: "linear" }, "fourth")
+
+          .to(frames, updateFrame(170), "fifth")
+          .to(".animate3", { opacity: 0, ease: "linear" }, "fifth")
+
+          .to(frames, updateFrame(200), "sixth")
+          .to(".animate4", { x: "0%", ease: "expo" }, "sixth")
+
+          .to(frames, updateFrame(230), "seventh")
+          .to(".animate4", { x: "0%", ease: "expo" }, "seventh")
+
+          .to(frames, updateFrame(260), "eighth")
+          .to(".animate4", { opacity: 0, ease: "linear" }, "eighth")
+
+          .to(frames, updateFrame(290), "nineth")
+          .to("canvas", { scale: 0.5, ease: "linear" }, "nineth")
+
+          .to(frames, updateFrame(320), "tenth")
+          .to(".panelism", { opacity: 1, ease: "expo" }, "tenth")
+
+          .to(frames, updateFrame(350), "tenth")
+          .to(".panelism span", { width: 200, ease: "expo" }, "tenth")
+
+          .to(frames, updateFrame(381), "twelfth")
+          .to("canvas", { scale: 1, ease: "linear" }, "twelfth")
+          .to(".panelism", { scale: 2, ease: "circ" }, "twelfth")
+
+          .to(frames, updateFrame(381), "thirteen")
+          .to(".panelism", { scale: 2, ease: "circ" }, "thirteen");
+      };
+
+      document.querySelectorAll(".recent-works h2").forEach(function (ele) {
+        gsap.to(ele, {
+          scrollTrigger: {
+            trigger: ele,
+            start: "top 90%",
+            end: "bottom 20%",
+            scrub: 2,
+          },
+          opacity: 0.3,
+        });
+      });
+      //lenis for smooth scrolling
+      const lenis = new Lenis();
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+      //lenis for smooth scrolling
+      preloadImages();
+      window.addEventListener("resize", function () {
+        loadImage(Math.floor(frames.currentIndex));
+      });
+    </script>
+  </body>
+</html>
