@@ -3,249 +3,520 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Doze Studio</title>
     <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
     <link
       rel="stylesheet"
       href="https://unpkg.com/lenis@1.1.9/dist/lenis.css"
     />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Core styles */
+      .hidden-on-load {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .work-item {
+        line-height: 1.5;
+      }
+
+      /* Mobile-first responsive styles */
+      @media (max-width: 768px) {
+        .mobile-text {
+          font-size: clamp(1rem, 4vw, 1.5rem);
+        }
+
+        .mobile-heading {
+          font-size: clamp(1.5rem, 6vw, 2.5rem);
+        }
+
+        .mobile-panel {
+          width: 100% !important;
+          padding: 1rem !important;
+        }
+
+        .animate4 {
+          width: 100% !important;
+        }
+      }
+
+      /* Loading screen */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      /* Performance optimizations */
+      .will-change-transform {
+        will-change: transform;
+      }
+
+      /* Animation classes */
+      .animate1,
+      .animate2,
+      .animate3,
+      .animate4,
+      .panelism {
+        transition: opacity 0.3s ease, transform 0.5s ease;
+      }
+    </style>
   </head>
-  <body>
+  <body class="overflow-x-hidden">
+    <!-- Loading screen -->
+    <div class="loader text-white">
+      <div class="text-center">
+        <h2 class="text-2xl">Loading Assets</h2>
+        <div class="mt-4 w-64 h-2 bg-gray-700 rounded-full">
+          <div
+            class="progress-bar h-full bg-white rounded-full"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+    </div>
+
     <div class="w-full bg-zinc-900">
       <div class="parent w-full h-[700vh] relative top-0 left-0">
-        <div class="sticky w-full h-screen top-0 left-0 overflow-x-hidden">
-          <canvas class="w-full h-screen" id="frame"></canvas>
+        <div class="sticky w-full h-screen top-0 left-0 overflow-hidden">
+          <canvas
+            class="w-full h-screen will-change-transform"
+            id="frame"
+          ></canvas>
+
+          <!-- First Animation Text -->
           <div
-            class="animate1 absolute z-[2] left-10 bottom-10 w-1/2 text-white"
+            class="animate1 absolute z-[2] left-4 md:left-10 bottom-4 md:bottom-10 w-full md:w-1/2 text-white px-4 md:px-0"
           >
-            <h1 class="text-3xl font-[100] leading-20 uppercase">
+            <h1
+              class="mobile-heading md:text-3xl font-[100] leading-tight md:leading-20 uppercase"
+            >
               &copy;2024 DOZE STD
             </h1>
-            <h1 class="text-3xl uppercase">
+            <h1 class="mobile-text md:text-3xl uppercase">
               shaping brands &rarr; crafting motion
             </h1>
           </div>
+
+          <!-- Second Animation Text -->
           <div
-            class="animate2 absolute z-[2] right-10 bottom-10 text-white text-right opacity-0 flex w-1/3"
+            class="animate2 absolute z-[2] right-4 md:right-10 bottom-4 md:bottom-10 text-white text-right opacity-0 flex flex-col md:flex-row w-full md:w-1/3 px-4 md:px-0"
           >
-            <h1 class="text-6xl width-fit leading-20 font-[100]">
+            <h1
+              class="mobile-heading md:text-6xl leading-tight md:leading-20 font-[100] mb-2 md:mb-0"
+            >
               TRANSFORMING VISIONS
             </h1>
-            <h1 class="text-xl w-1/2">
+            <h1 class="mobile-text md:text-xl w-full md:w-1/2">
               Building identity and inspiring action. Sculpting digital
               experience resonate
             </h1>
           </div>
+
+          <!-- Third Animation Text -->
           <div
-            class="animate3 absolute z-[2] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center opacity-0"
+            class="animate3 absolute z-[2] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center opacity-0 px-4 md:px-0"
           >
-            <h1 class="text-6xl leading-20 font-[100]">Elevating Aesthetics</h1>
-            <h1 class="text-xl">
+            <h1
+              class="mobile-heading md:text-6xl leading-tight md:leading-20 font-[100]"
+            >
+              Elevating Aesthetics
+            </h1>
+            <h1 class="mobile-text md:text-xl max-w-2xl mx-auto">
               Crafting solutions and exploring new horizon. Evolving narratives
               and elevating aesthetics in every project. experience resonate
             </h1>
           </div>
+
+          <!-- Side Panel -->
           <div
-            class="absolute animate4 z-[2] top-0 right-0 translate-x-full h-screen w-1/3 bg-white text-black p-12"
+            class="absolute animate4 z-[2] top-0 right-0 translate-x-full h-screen w-full md:w-1/3 bg-white text-black p-6 md:p-12"
           >
-            <h2 class="text-3xl font-[400] text-slate-500">
+            <h2 class="text-2xl md:text-3xl font-[400] text-slate-500">
               &copy;2024 Doze.std
             </h2>
-            <p class="font-semibold text-2xl mt-12">
+            <p class="font-semibold text-xl md:text-2xl mt-8 md:mt-12">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
               distinctio, suscipit iste, magnam ducimus nihil exercitationem,
               tempora dignissimos tenetur ut assumenda. Ut sint quos ab
               exercitationem sit ullam laboriosam maxime illo eos.
             </p>
-            <button class="border-2 border-black px-4 py-2 mt-4">
+            <button
+              class="border-2 border-black px-4 py-2 mt-4 hover:bg-black hover:text-white transition-colors"
+            >
               Get Reviews &rarr;
             </button>
-            <div class="mt-20">
-              <h2 class="font-semibold text-2xl">Innovating Design</h2>
-              <p class="font-semibold text-xl mt-5">
+            <div class="mt-12 md:mt-20">
+              <h2 class="font-semibold text-xl md:text-2xl">
+                Innovating Design
+              </h2>
+              <p class="font-semibold text-lg md:text-xl mt-5">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
                 distinctio, suscipit iste, magnam ducimus nihil exercitationem.
               </p>
-              <button class="bg-black text-white px-8 py-4 mt-4">
+              <button
+                class="bg-black text-white px-6 md:px-8 py-3 md:py-4 mt-4 hover:bg-zinc-800 transition-colors"
+              >
                 Experience
               </button>
             </div>
           </div>
+
+          <!-- Final Animation Text -->
           <div
-            class="absolute panelism z-[2] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white text-6xl tracking-tighter opacity-0"
+            class="panelism absolute z-[2] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white opacity-0 px-4 md:px-0"
           >
-            &copy;Panelism
-            <span class="line w-10 h-1 bg-white inline-block"></span> 2048
+            <h1 class="mobile-heading md:text-6xl tracking-tighter">
+              &copy;Panelism
+              <span
+                class="line w-10 h-1 bg-white inline-block align-middle"
+              ></span>
+              2048
+            </h1>
           </div>
         </div>
       </div>
-      <div class="w-full bg-white text-black px-10 py-32">
-        <h1 class="text-6xl tracking-tighter">&reg;Our Recent Works.</h1>
+
+      <!-- Recent Works Section -->
+      <div class="w-full bg-white text-black px-4 md:px-10 py-16 md:py-32">
+        <h1 class="mobile-heading md:text-6xl tracking-tighter">
+          &reg;Our Recent Works.
+        </h1>
         <div
-          class="text-5xl recent-works font-semibold flex flex-col gap-5 mt-16 p-3 w-1/2"
+          class="text-3xl md:text-5xl recent-works font-semibold flex flex-col gap-5 mt-8 md:mt-16 p-3 w-full md:w-1/2"
         >
-          <h2>Zonk Blerk</h2>
-          <h2>Flibbler Sploke</h2>
-          <h2>Wibble Zurf</h2>
-          <h2>Snarp Woogle</h2>
-          <h2>Zonk Blerk</h2>
-          <h2>Flibbler Sploke</h2>
-          <h2>Wibble Zurf</h2>
-          <h2>Snarp Woogle</h2>
-          <h2>Zonk Blerk</h2>
-          <h2>Flibbler Sploke</h2>
-          <h2>Wibble Zurf</h2>
-          <h2>Snarp Woogle</h2>
-          <h2>Zonk Blerk</h2>
-          <h2>Flibbler Sploke</h2>
-          <h2>Wibble Zurf</h2>
-          <h2>Snarp Woogle</h2>
+          <!-- Dynamic content loading for better performance -->
+          <div class="works-container"></div>
         </div>
       </div>
     </div>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
+      // Initialize GSAP
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Canvas setup
       const canvas = document.querySelector("canvas");
       const ctx = canvas.getContext("2d");
+      const loader = document.querySelector(".loader");
+      const progressBar = document.querySelector(".progress-bar");
 
       const frames = {
         currentIndex: 0,
         maxFrames: 382,
+        images: [],
       };
-      let imageLoaded = 0;
-      const images = [];
-      const preloadImages = () => {
-        for (let i = 1; i <= frames.maxFrames; i++) {
-          const img = new Image();
-          img.src = `./Frames/frame_${i.toString().padStart(4, "0")}.jpeg`;
-          img.onload = () => {
-            imageLoaded++;
-            if (imageLoaded === frames.maxFrames) {
-              loadImage(frames.currentIndex);
-              startAnimation();
-            }
-          };
-          images.push(img);
+
+      // Image loading with progress tracking
+      const loadImages = async () => {
+        let loadedImages = 0;
+
+        const updateProgress = () => {
+          loadedImages++;
+          const progress = (loadedImages / frames.maxFrames) * 100;
+          progressBar.style.width = `${progress}%`;
+
+          if (loadedImages === frames.maxFrames) {
+            setTimeout(() => {
+              loader.style.opacity = "0";
+              setTimeout(() => loader.remove(), 500);
+              initAnimations();
+              renderFrame(0);
+            }, 500);
+          }
+        };
+
+        // Improved canvas scaling and rendering
+        const resizeCanvas = () => {
+          const dpr = window.devicePixelRatio || 1;
+          const rect = canvas.getBoundingClientRect();
+
+          canvas.width = rect.width * dpr;
+          canvas.height = rect.height * dpr;
+
+          ctx.scale(dpr, dpr);
+
+          canvas.style.width = `${rect.width}px`;
+          canvas.style.height = `${rect.height}px`;
+        };
+
+        const loadImage = (index) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = `./Frames/frame_${(index + 1)
+              .toString()
+              .padStart(4, "0")}.jpeg`;
+            img.onload = () => {
+              frames.images[index] = img;
+              updateProgress();
+              renderFrame(0);
+              resolve();
+            };
+            img.onerror = () => {
+              console.error(`Failed to load image ${index + 1}`);
+              frames.images[index] = null;
+              updateProgress();
+              resolve();
+            };
+          });
+        };
+
+        const loadChunk = async (start, size) => {
+          const promises = [];
+          for (
+            let i = start;
+            i < Math.min(start + size, frames.maxFrames);
+            i++
+          ) {
+            promises.push(loadImage(i));
+          }
+          await Promise.all(promises);
+        };
+
+        const chunkSize = 50;
+        for (let i = 0; i < frames.maxFrames; i += chunkSize) {
+          await loadChunk(i, chunkSize);
         }
       };
-      const loadImage = (index) => {
-        if (index >= 0 && index <= frames.maxFrames) {
-          const img = images[index];
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
 
-          const scaleX = canvas.width / img.width;
-          const scaleY = canvas.height / img.height;
-          const scale = Math.max(scaleX, scaleY);
+      // Canvas rendering
+      const renderFrame = (index) => {
+        if (!frames.images[index]) return;
 
-          const newWidth = img.width * scale;
-          const newHeight = img.height * scale;
+        const img = frames.images[index];
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
 
-          const offsetX = (canvas.width - newWidth) / 2;
-          const offsetY = (canvas.height - newHeight) / 2;
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
 
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = "high";
-          ctx.drawImage(img, offsetX, offsetY, newWidth, newHeight);
-        }
+        ctx.scale(dpr, dpr);
+
+        const scaleX = rect.width / img.width;
+        const scaleY = rect.height / img.height;
+        const scale = Math.max(scaleX, scaleY);
+
+        const newWidth = img.width * scale;
+        const newHeight = img.height * scale;
+
+        const offsetX = (rect.width - newWidth) / 2;
+        const offsetY = (rect.height - newHeight) / 2;
+
+        ctx.drawImage(img, offsetX, offsetY, newWidth, newHeight);
       };
 
-      const startAnimation = () => {
-        var tl = gsap.timeline({
+      // // Debounced resize handler
+      // let resizeTimeout;
+      // window.addEventListener("resize", () => {
+      //   clearTimeout(resizeTimeout);
+      //   resizeTimeout = setTimeout(() => {
+      //     resizeCanvas();
+      //     loadImage(Math.floor(frames.currentIndex));
+      //   }, 250);
+      // });
+
+      // Dynamic content loading for recent works
+      const works = [
+        "Zonk Blerk",
+        "Flibbler Sploke",
+        "Wibble Zurf",
+        "Snarp Woogle",
+        "Zonk Blerk",
+        "Flibbler Sploke",
+        "Wibble Zurf",
+        "Snarp Woogle",
+        // ... add all works here
+      ];
+
+      const worksContainer = document.querySelector(".works-container");
+      works.forEach((work) => {
+        const h2 = document.createElement("h2");
+        h2.textContent = work;
+        h2.className = "work-item";
+        worksContainer.appendChild(h2);
+      });
+
+      // Animation initialization
+      const initAnimations = () => {
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: ".parent",
             start: "top top",
+            end: "bottom bottom",
             scrub: 1,
           },
         });
-        const updateFrame = (index) => {
-          return {
-            currentIndex: index,
-            ease: "linear",
-            onUpdate: function () {
-              loadImage(Math.floor(frames.currentIndex));
+
+        tl.to(
+          frames,
+          {
+            currentIndex: 50,
+            onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+          },
+          "first"
+        )
+          .to(".animate1", { opacity: 0 }, "first")
+
+          .to(
+            frames,
+            {
+              currentIndex: 80,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
             },
-          };
-        };
+            "second"
+          )
+          .to(".animate2", { opacity: 1 }, "second")
 
-        tl.to(frames, updateFrame(50), "first")
-          .to(".animate1", { opacity: 0, ease: "linear" }, "first")
+          .to(
+            frames,
+            {
+              currentIndex: 110,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "third"
+          )
+          .to(".animate2", { opacity: 0 }, "third")
 
-          .to(frames, updateFrame(80), "second")
-          .to(".animate2", { opacity: 1, ease: "linear" }, "second")
+          .to(
+            frames,
+            {
+              currentIndex: 140,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "fourth"
+          )
+          .to(".animate3", { opacity: 1 }, "fourth")
 
-          .to(frames, updateFrame(110), "third")
-          .to(".animate2", { opacity: 0, ease: "linear" }, "third")
+          .to(
+            frames,
+            {
+              currentIndex: 170,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "fifth"
+          )
+          .to(".animate3", { opacity: 0 }, "fifth")
 
-          .to(frames, updateFrame(140), "fourth")
-          .to(".animate3", { opacity: 1, ease: "linear" }, "fourth")
+          .to(
+            frames,
+            {
+              currentIndex: 200,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "sixth"
+          )
+          .to(".animate4", { x: "0%", ease: "expo"}, "sixth")
 
-          .to(frames, updateFrame(170), "fifth")
-          .to(".animate3", { opacity: 0, ease: "linear" }, "fifth")
+          .to(
+            frames,
+            {
+              currentIndex: 230,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "seventh"
+          )
 
-          .to(frames, updateFrame(200), "sixth")
-          .to(".animate4", { x: "0%", ease: "expo" }, "sixth")
+          .to(
+            frames,
+            {
+              currentIndex: 260,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "eighth"
+          )
+          .to(".animate4", {  opacity: 0, ease: "linear" }, "eighth")
 
-          .to(frames, updateFrame(230), "seventh")
-          .to(".animate4", { x: "0%", ease: "expo" }, "seventh")
+          .to(
+            frames,
+            {
+              currentIndex: 290,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "ninth"
+          )
+          .to("canvas", { scale: 0.5 }, "ninth")
 
-          .to(frames, updateFrame(260), "eighth")
-          .to(".animate4", { opacity: 0, ease: "linear" }, "eighth")
+          .to(
+            frames,
+            {
+              currentIndex: 320,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "tenth"
+          )
+          .to(".panelism", { opacity: 1 }, "tenth")
+          .to(".panelism .line", { width: 200 }, "tenth")
 
-          .to(frames, updateFrame(290), "nineth")
-          .to("canvas", { scale: 0.5, ease: "linear" }, "nineth")
+          .to(
+            frames,
+            {
+              currentIndex: 381,
+              onUpdate: () => renderFrame(Math.floor(frames.currentIndex)),
+            },
+            "final"
+          )
+          .to("canvas", { scale: 1 }, "final")
+          .to(".panelism", { scale: 2 }, "final");
 
-          .to(frames, updateFrame(320), "tenth")
-          .to(".panelism", { opacity: 1, ease: "expo" }, "tenth")
-
-          .to(frames, updateFrame(350), "tenth")
-          .to(".panelism span", { width: 200, ease: "expo" }, "tenth")
-
-          .to(frames, updateFrame(381), "twelfth")
-          .to("canvas", { scale: 1, ease: "linear" }, "twelfth")
-          .to(".panelism", { scale: 2, ease: "circ" }, "twelfth")
-
-          .to(frames, updateFrame(381), "thirteen")
-          .to(".panelism", { scale: 2, ease: "circ" }, "thirteen");
+        // Recent works animations
+        document.querySelectorAll(".recent-works h2").forEach((element) => {
+          gsap.to(element, {
+            scrollTrigger: {
+              trigger: element,
+              start: "top 90%",
+              end: "bottom 20%",
+              scrub: 2,
+            },
+            opacity: 0.3,
+          });
+        });
       };
 
-      document.querySelectorAll(".recent-works h2").forEach(function (ele) {
-        gsap.to(ele, {
-          scrollTrigger: {
-            trigger: ele,
-            start: "top 90%",
-            end: "bottom 20%",
-            scrub: 2,
-          },
-          opacity: 0.3,
-        });
+      // Initialize smooth scrolling with Lenis
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: "vertical",
+        gestureDirection: "vertical",
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2,
       });
-      //lenis for smooth scrolling
-      const lenis = new Lenis();
 
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+      // Connect Lenis scroll to GSAP
+      lenis.on("scroll", ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Handle window resize
+      function handleResize() {
+        renderFrame(Math.floor(frames.currentIndex));
       }
 
-      requestAnimationFrame(raf);
-      //lenis for smooth scrolling
-      preloadImages();
-      window.addEventListener("resize", function () {
-        loadImage(Math.floor(frames.currentIndex));
+      window.addEventListener("resize", handleResize);
+
+      // Initialize everything
+      document.addEventListener("DOMContentLoaded", () => {
+        // Start loading images
+        loadImages().catch(console.error);
+
+        // Initial render
+        renderFrame(0);
       });
     </script>
   </body>
