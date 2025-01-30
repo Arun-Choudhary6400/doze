@@ -1,4 +1,4 @@
-# scroll-animation-example
+# Doze Studio
 
 ## Project Links
 
