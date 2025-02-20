@@ -2,7 +2,7 @@
 
 ## Project Links
 
-- **Live Demo:** [https://scroll-animations.onrender.com/]
+- **Live Demo:** [https://doze-studio.onrender.com/]
 
 ## Installation
 
