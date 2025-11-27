@@ -14,7 +14,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4786204459015918"
      crossorigin="anonymous"></script>
     <style>
-      /* Core styles */
+      
       .hidden-on-load {
         opacity: 0;
         visibility: hidden;
@@ -23,7 +23,6 @@
         line-height: 1.5;
       }
 
-      /* Mobile-first responsive styles */
       @media (max-width: 768px) {
         .mobile-text {
           font-size: clamp(1rem, 4vw, 1.5rem);
@@ -43,7 +42,6 @@
         }
       }
 
-      /* Loading screen */
       .loader {
         position: fixed;
         top: 0;
@@ -58,12 +56,10 @@
         transition: opacity 0.5s ease;
       }
 
-      /* Performance optimizations */
       .will-change-transform {
         will-change: transform;
       }
 
-      /* Animation classes */
       .animate1,
       .animate2,
       .animate3,
@@ -74,7 +70,7 @@
     </style>
   </head>
   <body class="overflow-x-hidden">
-    <!-- Loading screen -->
+    
     <div class="loader text-white">
       <div class="text-center">
         <h2 class="text-2xl">Loading Assets</h2>
@@ -95,7 +91,6 @@
             id="frame"
           ></canvas>
 
-          <!-- First Animation Text -->
           <div
             class="animate1 absolute z-[2] left-4 md:left-10 bottom-4 md:bottom-10 w-full md:w-1/2 text-white px-4 md:px-0"
           >
@@ -109,7 +104,6 @@
             </h1>
           </div>
 
-          <!-- Second Animation Text -->
           <div
             class="animate2 absolute z-[2] right-4 md:right-10 bottom-4 md:bottom-10 text-white text-right opacity-0 flex flex-col md:flex-row w-full md:w-1/3 px-4 md:px-0"
           >
@@ -124,7 +118,6 @@
             </h1>
           </div>
 
-          <!-- Third Animation Text -->
           <div
             class="animate3 absolute z-[2] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center opacity-0 px-4 md:px-0"
           >
@@ -139,7 +132,6 @@
             </h1>
           </div>
 
-          <!-- Side Panel -->
           <div
             class="absolute animate4 z-[2] top-0 right-0 translate-x-full h-screen w-full md:w-1/3 bg-white text-black p-6 md:p-12"
           >
@@ -173,7 +165,6 @@
             </div>
           </div>
 
-          <!-- Final Animation Text -->
           <div
             class="panelism absolute z-[2] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white opacity-0 px-4 md:px-0"
           >
@@ -188,7 +179,6 @@
         </div>
       </div>
 
-      <!-- Recent Works Section -->
       <div class="w-full bg-white text-black px-4 md:px-10 py-16 md:py-32">
         <h1 class="mobile-heading md:text-6xl tracking-tighter">
           &reg;Our Recent Works.
@@ -196,7 +186,6 @@
         <div
           class="text-3xl md:text-5xl recent-works font-semibold flex flex-col gap-5 mt-8 md:mt-16 p-3 w-full md:w-1/2"
         >
-          <!-- Dynamic content loading for better performance -->
           <div class="works-container"></div>
         </div>
       </div>
@@ -206,10 +195,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-      // Initialize GSAP
+      
       gsap.registerPlugin(ScrollTrigger);
 
-      // Canvas setup
       const canvas = document.querySelector("canvas");
       const ctx = canvas.getContext("2d");
       const loader = document.querySelector(".loader");
@@ -221,7 +209,6 @@
         images: [],
       };
 
-      // Image loading with progress tracking
       const loadImages = async () => {
         let loadedImages = 0;
 
@@ -240,7 +227,6 @@
           }
         };
 
-        // Improved canvas scaling and rendering
         const resizeCanvas = () => {
           const dpr = window.devicePixelRatio || 1;
           const rect = canvas.getBoundingClientRect();
@@ -293,7 +279,6 @@
         }
       };
 
-      // Canvas rendering
       const renderFrame = (index) => {
         if (!frames.images[index]) return;
 
@@ -319,17 +304,6 @@
         ctx.drawImage(img, offsetX, offsetY, newWidth, newHeight);
       };
 
-      // // Debounced resize handler
-      // let resizeTimeout;
-      // window.addEventListener("resize", () => {
-      //   clearTimeout(resizeTimeout);
-      //   resizeTimeout = setTimeout(() => {
-      //     resizeCanvas();
-      //     loadImage(Math.floor(frames.currentIndex));
-      //   }, 250);
-      // });
-
-      // Dynamic content loading for recent works
       const works = [
         "Zonk Blerk",
         "Flibbler Sploke",
@@ -339,7 +313,6 @@
         "Flibbler Sploke",
         "Wibble Zurf",
         "Snarp Woogle",
-        // ... add all works here
       ];
 
       const worksContainer = document.querySelector(".works-container");
@@ -350,7 +323,6 @@
         worksContainer.appendChild(h2);
       });
 
-      // Animation initialization
       const initAnimations = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -472,7 +444,6 @@
           .to("canvas", { scale: 1 }, "final")
           .to(".panelism", { scale: 2 }, "final");
 
-        // Recent works animations
         document.querySelectorAll(".recent-works h2").forEach((element) => {
           gsap.to(element, {
             scrollTrigger: {
@@ -486,7 +457,6 @@
         });
       };
 
-      // Initialize smooth scrolling with Lenis
       const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -497,7 +467,6 @@
         touchMultiplier: 2,
       });
 
-      // Connect Lenis scroll to GSAP
       lenis.on("scroll", ScrollTrigger.update);
 
       gsap.ticker.add((time) => {
@@ -506,19 +475,14 @@
 
       gsap.ticker.lagSmoothing(0);
 
-      // Handle window resize
       function handleResize() {
         renderFrame(Math.floor(frames.currentIndex));
       }
 
       window.addEventListener("resize", handleResize);
 
-      // Initialize everything
       document.addEventListener("DOMContentLoaded", () => {
-        // Start loading images
         loadImages().catch(console.error);
-
-        // Initial render
         renderFrame(0);
       });
     </script>
